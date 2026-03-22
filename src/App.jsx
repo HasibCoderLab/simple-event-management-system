@@ -1,121 +1,83 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { EventProvider } from "./context/EventContext";
 
-function App() {
-  const [count, setCount] = useState(0)
+// Layout
+import Navbar    from "./components/layout/Navbar";
+import BottomNav from "./components/layout/BottomNav";
 
+// Background
+import ParticleField from "./components/background/ParticleField";
+import GlowOrbs      from "./components/background/GlowOrbs";
+import GridBg        from "./components/background/GridBg";
+
+// Pages
+import Dashboard from "./pages/Dashboard";
+import Guests    from "./pages/Guests";
+import Recipes   from "./pages/Recipes";
+import Notes     from "./pages/Notes";
+import TodoList  from "./pages/TodoList";
+import Settings  from "./pages/Settings";
+
+// ── Page transition wrapper ──────────────────────────────────────────────────
+function PageTransition({ children }) {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <motion.div
+      initial={{ opacity: 0, y: 28, scale: 0.97, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0,  scale: 1,    filter: "blur(0px)" }}
+      exit={{    opacity: 0, y: -28, scale: 0.97, filter: "blur(6px)" }}
+      transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
-export default App
+// ── Animated routes ───────────────────────────────────────────────────────────
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/"         element={<PageTransition><Dashboard /></PageTransition>} />
+        <Route path="/guests"   element={<PageTransition><Guests    /></PageTransition>} />
+        <Route path="/recipes"  element={<PageTransition><Recipes   /></PageTransition>} />
+        <Route path="/notes"    element={<PageTransition><Notes     /></PageTransition>} />
+        <Route path="/todos"    element={<PageTransition><TodoList  /></PageTransition>} />
+        <Route path="/settings" element={<PageTransition><Settings  /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
+// ── Root App ──────────────────────────────────────────────────────────────────
+export default function App() {
+  return (
+    <BrowserRouter>
+      <EventProvider>
+        <div
+          className="min-h-screen text-white"
+          style={{
+            background: "#050d1a",
+            fontFamily: "'Hind Siliguri', 'SolaimanLipi', sans-serif",
+          }}
+        >
+          {/* ── Fixed background layers ── */}
+          <GridBg />
+          <GlowOrbs />
+          <ParticleField />
+
+          {/* ── Navigation ── */}
+          <Navbar />
+          <BottomNav />
+
+          {/* ── Main content ── */}
+          <main className="relative z-10 max-w-5xl mx-auto px-4 pt-24 pb-28 md:pb-12">
+            <AnimatedRoutes />
+          </main>
+        </div>
+      </EventProvider>
+    </BrowserRouter>
+  );
+}
