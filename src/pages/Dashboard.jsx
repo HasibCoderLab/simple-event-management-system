@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEvent } from "../context/EventContext";
-import Reveal        from "../components/ui/Reveal";
-import GlassCard     from "../components/ui/GlassCard";
-import StatChip      from "../components/ui/StatChip";
-import CyberButton   from "../components/ui/CyberButton";
-import ProgressRing  from "../components/ui/ProgressRing";
+import Reveal from "../components/ui/Reveal";
+import GlassCard from "../components/ui/GlassCard";
+import StatChip from "../components/ui/StatChip";
+import CyberButton from "../components/ui/CyberButton";
+import ProgressRing from "../components/ui/ProgressRing";
 import {
   Plus, Users, ChefHat, StickyNote, CheckSquare,
   TrendingUp, Clock, Star,
@@ -36,6 +36,31 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8">
+
+      {/* ── LOGO ─────────────────────────────────────────────────────────────── */}
+      <Reveal>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 90" width="340" height="53"
+          style={{ display: "block" }}>
+          <rect x="0" y="0" width="600" height="90" rx="16" fill="#0f172a" />
+          <polygon points="55,55 87,31 119,55" fill="#1e293b" />
+          <rect x="63" y="55" width="48" height="30" rx="3" fill="#f1a92a" />
+          <rect x="76" y="65" width="12" height="20" rx="2" fill="#0f172a" />
+          <circle cx="85" cy="76" r="1.5" fill="#f1a92a" />
+          <rect x="65" y="60" width="9" height="7" rx="1" fill="#0f172a" />
+          <rect x="97" y="60" width="9" height="7" rx="1" fill="#0f172a" />
+          <circle cx="69" cy="64" r="3.5" fill="#ffffff" />
+          <circle cx="101" cy="64" r="3.5" fill="#ffffff" />
+          <path d="M97 68 Q101 75 105 68" fill="#ffffff" />
+          <line x1="112" y1="33" x2="112" y2="43" stroke="#f1a92a" strokeWidth="1.4" strokeLinecap="round" />
+          <line x1="109" y1="33" x2="109" y2="38" stroke="#f1a92a" strokeWidth="1" strokeLinecap="round" />
+          <line x1="115" y1="33" x2="115" y2="38" stroke="#f1a92a" strokeWidth="1" strokeLinecap="round" />
+          <circle cx="120" cy="34" r="2.5" fill="none" stroke="#f1a92a" strokeWidth="1.2" />
+          <line x1="120" y1="36" x2="120" y2="43" stroke="#f1a92a" strokeWidth="1.4" strokeLinecap="round" />
+          <line x1="140" y1="22" x2="140" y2="68" stroke="#1e293b" strokeWidth="1" />
+          <text style={{ fontFamily: "Arial, sans-serif", fontSize: "22px", fontWeight: 700, fill: "#f8fafc", letterSpacing: "3px" }} x="158" y="47">EVENT PLANNER</text>
+          <text style={{ fontFamily: "Arial, sans-serif", fontSize: "10px", fontWeight: 400, fill: "#94a3b8", letterSpacing: "4px" }} x="158" y="66">GUESTS · RECIPES · HOME</text>
+        </svg>
+      </Reveal>
 
       {/* ── HERO BANNER ─────────────────────────────────────────────────────── */}
       <Reveal>
@@ -124,12 +149,12 @@ export default function Dashboard() {
       {/* ── STAT CHIPS GRID ─────────────────────────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {[
-          { emoji: "👥", value: stats.total,     label: "মোট মেহমান",   color: "#f1a92a", delay: 0.00 },
-          { emoji: "👨", value: stats.male,      label: "ছেলে",          color: "#38bdf8", delay: 0.07 },
-          { emoji: "👩", value: stats.female,    label: "মেয়ে",          color: "#f472b6", delay: 0.14 },
-          { emoji: "🏠", value: stats.ownSide,   label: "নিজ পক্ষ",     color: "#4ade80", delay: 0.21 },
-          { emoji: "💍", value: stats.borSide,   label: "বর পক্ষ",      color: "#a78bfa", delay: 0.28 },
-          { emoji: "✅", value: stats.confirmed, label: "নিশ্চিত",       color: "#14b8a6", delay: 0.35 },
+          { emoji: "👥", value: stats.total, label: "মোট মেহমান", color: "#f1a92a", delay: 0.00 },
+          { emoji: "👨", value: stats.male, label: "ছেলে", color: "#38bdf8", delay: 0.07 },
+          { emoji: "👩", value: stats.female, label: "মেয়ে", color: "#f472b6", delay: 0.14 },
+          { emoji: "🏠", value: stats.ownSide, label: "নিজ পক্ষ", color: "#4ade80", delay: 0.21 },
+          { emoji: "💍", value: stats.borSide, label: "বর পক্ষ", color: "#a78bfa", delay: 0.28 },
+          { emoji: "✅", value: stats.confirmed, label: "নিশ্চিত", color: "#14b8a6", delay: 0.35 },
         ].map((s) => (
           <StatChip
             key={s.label}
@@ -161,9 +186,9 @@ export default function Dashboard() {
                 size={110}
               />
               <div className="space-y-2">
-                <InfoRow label="নিশ্চিত"  value={`${stats.confirmed} জন`} color="#14b8a6" />
+                <InfoRow label="নিশ্চিত" value={`${stats.confirmed} জন`} color="#14b8a6" />
                 <InfoRow label="অপেক্ষায়" value={`${stats.total - stats.confirmed} জন`} color="#f472b6" />
-                <InfoRow label="মোট"      value={`${stats.total} জন`} />
+                <InfoRow label="মোট" value={`${stats.total} জন`} />
               </div>
             </div>
           </GlassCard>
@@ -178,10 +203,10 @@ export default function Dashboard() {
             </h3>
             <div className="space-y-3">
               {[
-                { label: "ছেলে মেহমান",   value: stats.male,    total: stats.total, color: "#38bdf8" },
-                { label: "মেয়ে মেহমান",   value: stats.female,  total: stats.total, color: "#f472b6" },
-                { label: "নিজ পক্ষ",      value: stats.ownSide, total: stats.total, color: "#4ade80" },
-                { label: "বর পক্ষ",       value: stats.borSide, total: stats.total, color: "#a78bfa" },
+                { label: "ছেলে মেহমান", value: stats.male, total: stats.total, color: "#38bdf8" },
+                { label: "মেয়ে মেহমান", value: stats.female, total: stats.total, color: "#f472b6" },
+                { label: "নিজ পক্ষ", value: stats.ownSide, total: stats.total, color: "#4ade80" },
+                { label: "বর পক্ষ", value: stats.borSide, total: stats.total, color: "#a78bfa" },
               ].map((row) => (
                 <div key={row.label}>
                   <div className="flex justify-between text-xs mb-1">
@@ -211,8 +236,8 @@ export default function Dashboard() {
       {/* ── CONTENT OVERVIEW ROW ────────────────────────────────────────────── */}
       <div className="grid md:grid-cols-3 gap-4">
         {[
-          { label: "রেসিপি",  value: recipes.length, icon: "🍽️", color: "#14b8a6", route: "/recipes" },
-          { label: "নোটস",    value: notes.length,   icon: "📝", color: "#a78bfa", route: "/notes"   },
+          { label: "রেসিপি", value: recipes.length, icon: "🍽️", color: "#14b8a6", route: "/recipes" },
+          { label: "নোটস", value: notes.length, icon: "📝", color: "#a78bfa", route: "/notes" },
           { label: "কাজ বাকি", value: todos.filter(t => !t.done).length, icon: "📋", color: "#f472b6", route: "/todos" },
         ].map((item, i) => (
           <Reveal key={item.label} delay={i * 0.08}>
@@ -276,13 +301,12 @@ export default function Dashboard() {
                   className="flex items-center gap-3 text-sm"
                 >
                   <div
-                    className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                      t.priority === "high"
+                    className={`w-2 h-2 rounded-full flex-shrink-0 ${t.priority === "high"
                         ? "bg-rose-400"
                         : t.priority === "medium"
-                        ? "bg-yellow-400"
-                        : "bg-teal-400"
-                    }`}
+                          ? "bg-yellow-400"
+                          : "bg-teal-400"
+                      }`}
                   />
                   <span className="text-gray-300">{t.task}</span>
                 </motion.div>
@@ -331,11 +355,10 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <span
-                    className={`text-[10px] font-black px-2.5 py-1 rounded-full ${
-                      g.confirmed
+                    className={`text-[10px] font-black px-2.5 py-1 rounded-full ${g.confirmed
                         ? "bg-teal-500/20 text-teal-400"
                         : "bg-gray-700/60 text-gray-500"
-                    }`}
+                      }`}
                   >
                     {g.confirmed ? "✓ নিশ্চিত" : "অপেক্ষায়"}
                   </span>
