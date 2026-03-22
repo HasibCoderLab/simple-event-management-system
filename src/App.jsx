@@ -18,6 +18,7 @@ import Recipes   from "./pages/Recipes";
 import Notes     from "./pages/Notes";
 import TodoList  from "./pages/TodoList";
 import Settings  from "./pages/Settings";
+import NotFound from "./pages/NotFound";
 
 // ── Page transition wrapper ──────────────────────────────────────────────────
 function PageTransition({ children }) {
@@ -46,6 +47,9 @@ function AnimatedRoutes() {
         <Route path="/notes"    element={<PageTransition><Notes     /></PageTransition>} />
         <Route path="/todos"    element={<PageTransition><TodoList  /></PageTransition>} />
         <Route path="/settings" element={<PageTransition><Settings  /></PageTransition>} />
+       <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+
+
       </Routes>
     </AnimatePresence>
   );
