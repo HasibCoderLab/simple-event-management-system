@@ -1,0 +1,51 @@
+{
+  "name": "অনুষ্ঠান প্ল্যানার",
+  "short_name": "অনুষ্ঠান",
+  "description": "বিয়ে ও যেকোনো অনুষ্ঠানের মেহমান, রেসিপি, নোট ও কাজ পরিচালনার অ্যাপ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050d1a",
+  "theme_color": "#f1a92a",
+  "lang": "bn-BD",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "অনুষ্ঠান প্ল্যানার ড্যাশবোর্ড"
+    }
+  ],
+  "categories": ["lifestyle", "utilities", "productivity"],
+  "shortcuts": [
+    {
+      "name": "মেহমান তালিকা",
+      "short_name": "মেহমান",
+      "description": "মেহমান যোগ করুন",
+      "url": "/guests",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "রেসিপি",
+      "short_name": "রেসিপি",
+      "description": "মেনু পরিকল্পনা করুন",
+      "url": "/recipes",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
